@@ -662,7 +662,7 @@ orderForm?.addEventListener('submit', async e => {
   submitBtn.innerHTML = '<i class="ti ti-loader-2" style="animation:spin 1s linear infinite"></i> Sending...';
 
   try {
-    const res = await fetch('http://localhost:3000/api/orders', {
+    const res = await fetch('https://nearby-backend-pkni.onrender.com/api/orders', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, phone, shop, items, address }),

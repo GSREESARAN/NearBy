@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NearBy — Admin Dashboard</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -55,7 +60,11 @@
     }
 
     /* Main */
-    .main { padding: 24px; max-width: 1000px; margin: 0 auto; }
+    .main {
+      padding: 24px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
 
     /* Stats */
     .stats {
@@ -110,7 +119,9 @@
       transition: all 0.3s;
     }
 
-    .refresh-btn:hover { background: #16a34a; }
+    .refresh-btn:hover {
+      background: #16a34a;
+    }
 
     /* Filter tabs */
     .filters {
@@ -139,7 +150,11 @@
     }
 
     /* Order cards */
-    .orders-list { display: flex; flex-direction: column; gap: 16px; }
+    .orders-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
 
     .order-card {
       background: #111;
@@ -149,7 +164,9 @@
       transition: border 0.3s;
     }
 
-    .order-card:hover { border-color: #333; }
+    .order-card:hover {
+      border-color: #333;
+    }
 
     .order-header {
       display: flex;
@@ -192,17 +209,32 @@
       margin-bottom: 16px;
     }
 
-    .detail-item { font-size: 0.9rem; }
-    .detail-item span { color: #666; }
-    .detail-item p { color: #fff; margin-top: 2px; }
+    .detail-item {
+      font-size: 0.9rem;
+    }
+
+    .detail-item span {
+      color: #666;
+    }
+
+    .detail-item p {
+      color: #fff;
+      margin-top: 2px;
+    }
 
     .detail-full {
       grid-column: 1 / -1;
       font-size: 0.9rem;
     }
 
-    .detail-full span { color: #666; }
-    .detail-full p { color: #fff; margin-top: 2px; }
+    .detail-full span {
+      color: #666;
+    }
+
+    .detail-full p {
+      color: #fff;
+      margin-top: 2px;
+    }
 
     .order-time {
       color: #555;
@@ -211,7 +243,10 @@
     }
 
     /* Action buttons */
-    .order-actions { display: flex; gap: 10px; }
+    .order-actions {
+      display: flex;
+      gap: 10px;
+    }
 
     .action-btn {
       padding: 8px 18px;
@@ -228,14 +263,18 @@
       color: #000;
     }
 
-    .btn-confirm:hover { background: #16a34a; }
+    .btn-confirm:hover {
+      background: #16a34a;
+    }
 
     .btn-delivered {
       background: #3b82f6;
       color: #fff;
     }
 
-    .btn-delivered:hover { background: #2563eb; }
+    .btn-delivered:hover {
+      background: #2563eb;
+    }
 
     .btn-disabled {
       background: #1a1a1a;
@@ -250,7 +289,10 @@
       color: #444;
     }
 
-    .empty-state p { font-size: 1.1rem; margin-top: 12px; }
+    .empty-state p {
+      font-size: 1.1rem;
+      margin-top: 12px;
+    }
 
     /* Loading */
     .loading {
@@ -261,145 +303,154 @@
 
     /* Mobile */
     @media (max-width: 600px) {
-      .stats { grid-template-columns: repeat(2, 1fr); }
-      .order-details { grid-template-columns: 1fr; }
-      .detail-full { grid-column: 1; }
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .order-details {
+        grid-template-columns: 1fr;
+      }
+
+      .detail-full {
+        grid-column: 1;
+      }
     }
   </style>
 </head>
+
 <body>
 
-<!-- Navbar -->
-<div class="navbar">
-  <div>
-    <h1>🛵 NearBy</h1>
-    <p>Admin Dashboard</p>
-  </div>
-  <button class="logout-btn" onclick="logout()">Logout</button>
-</div>
-
-<!-- Main -->
-<div class="main">
-
-  <!-- Stats -->
-  <div class="stats">
-    <div class="stat-card">
-      <div class="number" id="total-count">-</div>
-      <div class="label">Total Orders</div>
+  <!-- Navbar -->
+  <div class="navbar">
+    <div>
+      <h1>🛵 NearBy</h1>
+      <p>Admin Dashboard</p>
     </div>
-    <div class="stat-card">
-      <div class="number" id="pending-count">-</div>
-      <div class="label">Pending</div>
+    <button class="logout-btn" onclick="logout()">Logout</button>
+  </div>
+
+  <!-- Main -->
+  <div class="main">
+
+    <!-- Stats -->
+    <div class="stats">
+      <div class="stat-card">
+        <div class="number" id="total-count">-</div>
+        <div class="label">Total Orders</div>
+      </div>
+      <div class="stat-card">
+        <div class="number" id="pending-count">-</div>
+        <div class="label">Pending</div>
+      </div>
+      <div class="stat-card">
+        <div class="number" id="confirmed-count">-</div>
+        <div class="label">Confirmed</div>
+      </div>
+      <div class="stat-card">
+        <div class="number" id="delivered-count">-</div>
+        <div class="label">Delivered</div>
+      </div>
     </div>
-    <div class="stat-card">
-      <div class="number" id="confirmed-count">-</div>
-      <div class="label">Confirmed</div>
+
+    <!-- Orders -->
+    <div class="section-header">
+      <h2>📋 Orders</h2>
+      <button class="refresh-btn" onclick="loadOrders()">🔄 Refresh</button>
     </div>
-    <div class="stat-card">
-      <div class="number" id="delivered-count">-</div>
-      <div class="label">Delivered</div>
+
+    <!-- Filters -->
+    <div class="filters">
+      <button class="filter-btn active" onclick="filterOrders('all', this)">All</button>
+      <button class="filter-btn" onclick="filterOrders('pending', this)">🟠 Pending</button>
+      <button class="filter-btn" onclick="filterOrders('confirmed', this)">🟢 Confirmed</button>
+      <button class="filter-btn" onclick="filterOrders('delivered', this)">🔵 Delivered</button>
     </div>
+
+    <!-- Orders List -->
+    <div class="orders-list" id="orders-list">
+      <div class="loading">Loading orders...</div>
+    </div>
+
   </div>
 
-  <!-- Orders -->
-  <div class="section-header">
-    <h2>📋 Orders</h2>
-    <button class="refresh-btn" onclick="loadOrders()">🔄 Refresh</button>
-  </div>
+  <script>
+    const API = 'https://nearby-backend-pkni.onrender.com';
+    let allOrders = [];
+    let currentFilter = 'all';
 
-  <!-- Filters -->
-  <div class="filters">
-    <button class="filter-btn active" onclick="filterOrders('all', this)">All</button>
-    <button class="filter-btn" onclick="filterOrders('pending', this)">🟠 Pending</button>
-    <button class="filter-btn" onclick="filterOrders('confirmed', this)">🟢 Confirmed</button>
-    <button class="filter-btn" onclick="filterOrders('delivered', this)">🔵 Delivered</button>
-  </div>
-
-  <!-- Orders List -->
-  <div class="orders-list" id="orders-list">
-    <div class="loading">Loading orders...</div>
-  </div>
-
-</div>
-
-<script>
-  const API = 'http://localhost:3000';
-  let allOrders = [];
-  let currentFilter = 'all';
-
-  // Check auth on page load
-  async function checkAuth() {
-    const token = localStorage.getItem('nearby_token');
-    if (!token) {
-      window.location.href = 'admin-login.html';
-      return;
-    }
-
-    try {
-      const res = await fetch(`${API}/api/auth/verify`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ token })
-      });
-      const data = await res.json();
-      if (!data.success) {
-        localStorage.removeItem('nearby_token');
+    // Check auth on page load
+    async function checkAuth() {
+      const token = localStorage.getItem('nearby_token');
+      if (!token) {
         window.location.href = 'admin-login.html';
+        return;
       }
-    } catch (err) {
-      console.error('Auth check failed:', err);
-    }
-  }
 
-  // Load all orders
-  async function loadOrders() {
-    try {
-      const res = await fetch(`${API}/api/orders`);
-      const data = await res.json();
-
-      if (data.success) {
-        allOrders = data.orders;
-        updateStats();
-        renderOrders(currentFilter);
+      try {
+        const res = await fetch(`${API}/api/auth/verify`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ token })
+        });
+        const data = await res.json();
+        if (!data.success) {
+          localStorage.removeItem('nearby_token');
+          window.location.href = 'admin-login.html';
+        }
+      } catch (err) {
+        console.error('Auth check failed:', err);
       }
-    } catch (err) {
-      document.getElementById('orders-list').innerHTML = 
-        '<div class="empty-state">❌ <p>Could not load orders. Is backend running?</p></div>';
-    }
-  }
-
-  // Update stats
-  function updateStats() {
-    document.getElementById('total-count').textContent = allOrders.length;
-    document.getElementById('pending-count').textContent = 
-      allOrders.filter(o => o.status === 'pending').length;
-    document.getElementById('confirmed-count').textContent = 
-      allOrders.filter(o => o.status === 'confirmed').length;
-    document.getElementById('delivered-count').textContent = 
-      allOrders.filter(o => o.status === 'delivered').length;
-  }
-
-  // Filter orders
-  function filterOrders(filter, btn) {
-    currentFilter = filter;
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    renderOrders(filter);
-  }
-
-  // Render orders
-  function renderOrders(filter) {
-    const list = document.getElementById('orders-list');
-    const filtered = filter === 'all' 
-      ? allOrders 
-      : allOrders.filter(o => o.status === filter);
-
-    if (filtered.length === 0) {
-      list.innerHTML = '<div class="empty-state">📭 <p>No orders found</p></div>';
-      return;
     }
 
-    list.innerHTML = filtered.map(order => `
+    // Load all orders
+    async function loadOrders() {
+      try {
+        const res = await fetch(`${API}/api/orders`);
+        const data = await res.json();
+
+        if (data.success) {
+          allOrders = data.orders;
+          updateStats();
+          renderOrders(currentFilter);
+        }
+      } catch (err) {
+        document.getElementById('orders-list').innerHTML =
+          '<div class="empty-state">❌ <p>Could not load orders. Is backend running?</p></div>';
+      }
+    }
+
+    // Update stats
+    function updateStats() {
+      document.getElementById('total-count').textContent = allOrders.length;
+      document.getElementById('pending-count').textContent =
+        allOrders.filter(o => o.status === 'pending').length;
+      document.getElementById('confirmed-count').textContent =
+        allOrders.filter(o => o.status === 'confirmed').length;
+      document.getElementById('delivered-count').textContent =
+        allOrders.filter(o => o.status === 'delivered').length;
+    }
+
+    // Filter orders
+    function filterOrders(filter, btn) {
+      currentFilter = filter;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderOrders(filter);
+    }
+
+    // Render orders
+    function renderOrders(filter) {
+      const list = document.getElementById('orders-list');
+      const filtered = filter === 'all'
+        ? allOrders
+        : allOrders.filter(o => o.status === filter);
+
+      if (filtered.length === 0) {
+        list.innerHTML = '<div class="empty-state">📭 <p>No orders found</p></div>';
+        return;
+      }
+
+      list.innerHTML = filtered.map(order => `
       <div class="order-card" id="card-${order.id}">
         <div class="order-header">
           <span class="order-id">Order #${String(order.id).padStart(4, '0')}</span>
@@ -452,55 +503,56 @@
         </div>
       </div>
     `).join('');
-  }
-
-  // Confirm order
-  async function confirmOrder(id) {
-    try {
-      const res = await fetch(`${API}/api/orders/${id}/confirm`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' }
-      });
-      const data = await res.json();
-      if (data.success) {
-        await loadOrders();
-      }
-    } catch (err) {
-      alert('Failed to confirm order. Try again.');
     }
-  }
 
-  // Mark delivered
-  async function markDelivered(id) {
-    try {
-      const res = await fetch(`${API}/api/orders/${id}/delivered`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' }
-      });
-      const data = await res.json();
-      if (data.success) {
-        await loadOrders();
+    // Confirm order
+    async function confirmOrder(id) {
+      try {
+        const res = await fetch(`${API}/api/orders/${id}/confirm`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' }
+        });
+        const data = await res.json();
+        if (data.success) {
+          await loadOrders();
+        }
+      } catch (err) {
+        alert('Failed to confirm order. Try again.');
       }
-    } catch (err) {
-      alert('Failed to update order. Try again.');
     }
-  }
 
-  // Logout
-  function logout() {
-    localStorage.removeItem('nearby_token');
-    window.location.href = 'admin-login.html';
-  }
+    // Mark delivered
+    async function markDelivered(id) {
+      try {
+        const res = await fetch(`${API}/api/orders/${id}/delivered`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' }
+        });
+        const data = await res.json();
+        if (data.success) {
+          await loadOrders();
+        }
+      } catch (err) {
+        alert('Failed to update order. Try again.');
+      }
+    }
 
-// Init
-window.addEventListener('load', async () => {
-  await checkAuth();
-  await loadOrders();
-});
+    // Logout
+    function logout() {
+      localStorage.removeItem('nearby_token');
+      window.location.href = 'admin-login.html';
+    }
 
-// Auto refresh every 30 seconds
-setInterval(loadOrders, 30000);
-</script>
+    // Init
+    window.addEventListener('load', async () => {
+      await checkAuth();
+      await loadOrders();
+    });
+
+    // Auto refresh every 30 seconds
+    setInterval(loadOrders, 30000);
+  </script>
 
 </body>
+
 </html>
