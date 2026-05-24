@@ -92,8 +92,7 @@ router.patch('/:id/confirm', async (req, res) => {
     const order = data[0];
 
     // SMS to customer
-    const customerMsg = `Hi ${order.name}! Your order has been confirmed by NearBy. Our delivery boy is on the way! Please keep cash/UPI ready. Thank you!`;
-    await sendSMS(order.phone, customerMsg);
+    const customerMsg = `Hi ${order.name}! Your order has been confirmed by NearBy. Shop: ${order.shop}, Items: ${order.items}. Our delivery boy is on the way! Please keep cash/UPI ready. Thank you!`; await sendSMS(order.phone, customerMsg);
 
     res.json({ success: true, message: 'Order confirmed!', order });
 

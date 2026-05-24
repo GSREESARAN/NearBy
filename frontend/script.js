@@ -661,16 +661,37 @@ orderForm?.addEventListener('submit', async e => {
   submitBtn.classList.add('loading');
   submitBtn.innerHTML = '<i class="ti ti-loader-2" style="animation:spin 1s linear infinite"></i> Sending...';
 
+  // try {
+  //   const res = await fetch('https://nearby-backend-pkni.onrender.com/api/orders', {
+  //     method: 'POST',
+  //     headers: { 'Content-Type': 'application/json' },
+  //     body: JSON.stringify({ name, phone, shop, items, address }),
+  //   });
+  //   if (res.ok) showSuccess();
+  //   else throw new Error();
+  // } catch {
+  //   showSuccess();
+  // }
+
   try {
     const res = await fetch('https://nearby-backend-pkni.onrender.com/api/orders', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, phone, shop, items, address }),
     });
-    if (res.ok) showSuccess();
-    else throw new Error();
-  } catch {
-    showSuccess();
+    if (res.ok) {
+      showSuccess();
+    } else {
+      // Reset button if failed
+      submitBtn.classList.remove('loading');
+      submitBtn.innerHTML = '<i class="ti ti-send"></i> Place Order';
+      alert('Failed to place order. Please try again!');
+    }
+  } catch (err) {
+    console.error('Order error:', err);
+    submitBtn.classList.remove('loading');
+    submitBtn.innerHTML = '<i class="ti ti-send"></i> Place Order';
+    alert('Something went wrong. Please try again!');
   }
 });
 
