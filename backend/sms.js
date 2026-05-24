@@ -4,13 +4,17 @@ const API_KEY = process.env.HTTPSMS_API_KEY;
 const PHONE = process.env.HTTPSMS_PHONE;
 
 async function sendSMS(phone, message) {
+  // Clean phone number — remove +91, spaces, dashes
+  const cleanPhone = phone.replace(/\D/g, '').slice(-10);
+  const formattedPhone = `+91${cleanPhone}`;
+
   try {
     const response = await axios.post(
       'https://api.httpsms.com/v1/messages/send',
       {
         content: message,
         from: PHONE,
-        to: `+91${phone}`
+        to: formattedPhone
       },
       {
         headers: {
