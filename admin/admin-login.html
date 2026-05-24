@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NearBy — Admin Login</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #0a0a0a;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .login-wrapper {
+      width: 100%;
+      max-width: 420px;
+      padding: 20px;
+    }
+
+    .logo {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .logo h1 {
+      font-size: 2rem;
+      color: #22c55e;
+      font-weight: 800;
+    }
+
+    .logo p {
+      color: #666;
+      font-size: 0.9rem;
+      margin-top: 4px;
+    }
+
+    .card {
+      background: #111;
+      border: 1px solid #222;
+      border-radius: 16px;
+      padding: 32px;
+    }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      background: #1a1a1a;
+      border-radius: 10px;
+      padding: 4px;
+      margin-bottom: 28px;
+    }
+
+    .tab {
+      flex: 1;
+      padding: 10px;
+      text-align: center;
+      border-radius: 8px;
+      cursor: pointer;
+      color: #666;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all 0.3s;
+      border: none;
+      background: none;
+    }
+
+    .tab.active {
+      background: #22c55e;
+      color: #000;
+      font-weight: 700;
+    }
+
+    /* Forms */
+    .form-section { display: none; }
+    .form-section.active { display: block; }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      color: #aaa;
+      font-size: 0.85rem;
+      margin-bottom: 8px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px 16px;
+      background: #1a1a1a;
+      border: 1px solid #333;
+      border-radius: 10px;
+      color: #fff;
+      font-size: 1rem;
+      outline: none;
+      transition: border 0.3s;
+    }
+
+    input:focus {
+      border-color: #22c55e;
+    }
+
+    /* PIN Input */
+    .pin-inputs {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 8px;
+    }
+
+    .pin-input {
+      width: 52px;
+      height: 56px;
+      text-align: center;
+      font-size: 1.4rem;
+      font-weight: 700;
+      padding: 0;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 14px;
+      background: #22c55e;
+      color: #000;
+      font-size: 1rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 8px;
+    }
+
+    .btn:hover {
+      background: #16a34a;
+      transform: translateY(-1px);
+    }
+
+    .btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .error-msg {
+      color: #ef4444;
+      font-size: 0.85rem;
+      text-align: center;
+      margin-top: 12px;
+      min-height: 20px;
+    }
+
+    .success-msg {
+      color: #22c55e;
+      font-size: 0.85rem;
+      text-align: center;
+      margin-top: 12px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="login-wrapper">
+  <div class="logo">
+    <h1>🛵 NearBy</h1>
+    <p>Admin Panel</p>
+  </div>
+
+  <div class="card">
+    <!-- Tabs -->
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab('password')">
+        🔐 Username & Password
+      </button>
+      <button class="tab" onclick="switchTab('pin')">
+        🔢 PIN Login
+      </button>
+    </div>
+
+    <!-- Password Login -->
+    <div class="form-section active" id="password-section">
+      <div class="form-group">
+        <label>Username</label>
+        <input type="text" id="username" placeholder="Enter username" />
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="password" placeholder="Enter password" />
+      </div>
+      <button class="btn" onclick="loginWithPassword()">Login →</button>
+      <div class="error-msg" id="password-error"></div>
+    </div>
+
+    <!-- PIN Login -->
+    <div class="form-section" id="pin-section">
+      <label style="text-align:center; display:block; margin-bottom:16px;">
+        Enter your 6-digit PIN
+      </label>
+      <div class="pin-inputs">
+        <input class="pin-input" type="password" maxlength="1" id="pin0" inputmode="numeric" />
+        <input class="pin-input" type="password" maxlength="1" id="pin1" inputmode="numeric" />
+        <input class="pin-input" type="password" maxlength="1" id="pin2" inputmode="numeric" />
+        <input class="pin-input" type="password" maxlength="1" id="pin3" inputmode="numeric" />
+        <input class="pin-input" type="password" maxlength="1" id="pin4" inputmode="numeric" />
+        <input class="pin-input" type="password" maxlength="1" id="pin5" inputmode="numeric" />
+      </div>
+      <button class="btn" onclick="loginWithPin()">Login →</button>
+      <div class="error-msg" id="pin-error"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const API = 'http://localhost:3000';
+
+  // Tab switching
+  function switchTab(tab) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.form-section').forEach(s => s.classList.remove('active'));
+
+    if (tab === 'password') {
+      document.querySelectorAll('.tab')[0].classList.add('active');
+      document.getElementById('password-section').classList.add('active');
+    } else {
+      document.querySelectorAll('.tab')[1].classList.add('active');
+      document.getElementById('pin-section').classList.add('active');
+      document.getElementById('pin0').focus();
+    }
+  }
+
+  // PIN auto-focus next input
+  document.querySelectorAll('.pin-input').forEach((input, index) => {
+    input.addEventListener('input', () => {
+      if (input.value && index < 5) {
+        document.getElementById(`pin${index + 1}`).focus();
+      }
+    });
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Backspace' && !input.value && index > 0) {
+        document.getElementById(`pin${index - 1}`).focus();
+      }
+    });
+  });
+
+  // Login with username + password
+  async function loginWithPassword() {
+    const username = document.getElementById('username').value.trim();
+    const password = document.getElementById('password').value.trim();
+    const errorEl = document.getElementById('password-error');
+
+    if (!username || !password) {
+      errorEl.textContent = 'Please enter username and password';
+      return;
+    }
+
+    try {
+      const res = await fetch(`${API}/api/auth/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        localStorage.setItem('nearby_token', data.token);
+        window.location.href = 'admin-dashboard.html';
+      } else {
+        errorEl.textContent = data.message;
+      }
+    } catch (err) {
+      errorEl.textContent = 'Server error. Is backend running?';
+    }
+  }
+
+  // Login with PIN
+  async function loginWithPin() {
+    const pin = Array.from({length: 6}, (_, i) => 
+      document.getElementById(`pin${i}`).value
+    ).join('');
+
+    const errorEl = document.getElementById('pin-error');
+
+    if (pin.length < 6) {
+      errorEl.textContent = 'Please enter all 6 digits';
+      return;
+    }
+
+    try {
+      const res = await fetch(`${API}/api/auth/pin`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ pin })
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        localStorage.setItem('nearby_token', data.token);
+        window.location.href = 'admin-dashboard.html';
+      } else {
+        errorEl.textContent = data.message;
+      }
+    } catch (err) {
+      errorEl.textContent = 'Server error. Is backend running?';
+    }
+  }
+
+  // If already logged in, redirect to dashboard
+  const token = localStorage.getItem('nearby_token');
+  if (token) window.location.href = 'admin-dashboard.html';
+</script>
+
+</body>
+</html>

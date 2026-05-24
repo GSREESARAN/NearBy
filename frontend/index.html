@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NearBy — Your Local Delivery Service</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- PAGE LOADER -->
+<div class="page-loader" id="pageLoader">
+  <div class="loader-logo">Near<span style="color:#8DBF3A">By</span></div>
+  <div class="loader-bar"><div class="loader-fill"></div></div>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+    <div class="nav-logo">
+      <div class="logo-icon"><i class="ti ti-bike"></i></div>
+      <div class="logo-text">
+        <span class="logo-main">Near<span class="logo-highlight">By</span></span>
+        <span class="logo-sub">Your city own delivery service</span>
+      </div>
+    </div>
+    <div class="nav-links">
+      <a href="#home" class="nav-link">Home</a>
+      <a href="#how-it-works" class="nav-link">How it works</a>
+      <a href="#order" class="nav-link">Order</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+      <button class="lang-toggle" id="langToggle" onclick="toggleLanguage()">
+        <i class="ti ti-world"></i>
+        <span id="langText">తెలుగు</span>
+      </button>
+      <a href="#order" class="btn-nav">Order Now</a>
+    </div>
+    <button class="hamburger" id="hamburger">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#home" class="mobile-link">Home</a>
+    <a href="#how-it-works" class="mobile-link">How it works</a>
+    <a href="#order" class="mobile-link">Order</a>
+    <a href="about.html" class="mobile-link">About</a>
+    <a href="contact.html" class="mobile-link">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg">
+    <div class="hero-gradient"></div>
+    <div class="floating-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+    </div>
+  </div>
+  <div class="hero-container">
+    <div class="hero-content">
+      <div class="hero-badge" data-aos="fade-down" data-aos-delay="100">
+        <span class="badge-dot"></span>
+        <span data-lang-en="Now delivering across the city" data-lang-te="సిటీ అంతటా డెలివరీ చేస్తున్నాం">Now delivering across the City</span>
+      </div>
+      <h1 class="hero-title" data-aos="fade-up" data-aos-delay="200">
+        <span data-lang-en="Get anything" data-lang-te="ఏదైనా తెప్పించుకోండి">Get anything</span>
+        <span class="title-highlight" data-lang-en="delivered" data-lang-te="డెలివరీ చేయించుకోండి">delivered</span>
+        <span data-lang-en="from local shops" data-lang-te="లోకల్ షాపుల నుండి">from local shops</span>
+      </h1>
+      <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="300"
+         data-lang-en="Food, groceries, medicine and more from your favourite local shops in the city. Not on Zomato or Swiggy? No problem!"
+         data-lang-te="ఫుడ్, కిరాణా, మెడిసిన్ మరియు మరిన్నీ  మీకు ఇష్టమైన లోకల్ షాపుల నుండి. జొమాటో లేదా స్విగ్గీలో లేదా? పర్వాలేదు!">
+        Food, groceries, medicine and more from your favourite local shops in the city. Not on Zomato or Swiggy? No problem!
+      </p>
+      <div class="hero-buttons" data-aos="fade-up" data-aos-delay="400">
+        <a href="#order" class="btn-primary">
+          <i class="ti ti-shopping-cart"></i>
+          <span data-lang-en="Place an order" data-lang-te="ఆర్డర్ చేయండి">Place an order</span>
+        </a>
+        <a href="https://wa.me/918008753839" class="btn-whatsapp" target="_blank">
+          <i class="ti ti-brand-whatsapp"></i>
+          <span data-lang-en="WhatsApp us" data-lang-te="వాట్సాప్ చేయండి">WhatsApp us</span>
+        </a>
+      </div>
+    </div>
+    <div class="hero-visual" data-aos="zoom-in" data-aos-delay="300">
+      <div class="floating-badge badge-food">🍱 Food</div>
+      <div class="floating-badge badge-grocery">🛒 Grocery</div>
+      <div class="floating-badge badge-medicine">💊 Medicine</div>
+      <div class="floating-badge badge-anything">📦 Anything</div>
+      <div class="hero-card" id="heroCard">
+        <div class="card-glow"></div>
+        <span class="card-emoji-display" id="cardEmoji">🍱</span>
+        <div class="card-emoji-caption" id="cardCaption">Fresh Food</div>
+        <div class="card-sub-caption" id="cardSubCaption">From local hotels & restaurants</div>
+        <div class="card-time">⚡ Delivered in ~30 min</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<section class="stats-bar">
+  <div class="stats-container">
+    <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
+      <div class="stat-icon">🛵</div>
+      <div class="stat-number"><span data-target="500" class="count">0</span><span class="stat-plus">+</span></div>
+      <div class="stat-label" data-lang-en="Orders Delivered" data-lang-te="డెలివరీ చేసిన ఆర్డర్లు">Orders Delivered</div>
+      <div class="stat-desc">and counting every day</div>
+    </div>
+    <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
+      <div class="stat-icon">🏪</div>
+      <div class="stat-number"><span data-target="100" class="count">0</span><span class="stat-plus">+</span></div>
+      <div class="stat-label" data-lang-en="Local Shops" data-lang-te="లోకల్ షాపులు">Local Shops</div>
+      <div class="stat-desc">across the city</div>
+    </div>
+    <div class="stat-item" data-aos="fade-up" data-aos-delay="300">
+      <div class="stat-icon">⚡</div>
+      <div class="stat-number"><span data-target="30" class="count">0</span></div>
+      <div class="stat-label" data-lang-en="Min Avg Delivery" data-lang-te="నిమిషాల డెలివరీ">Min Avg Delivery</div>
+      <div class="stat-desc">fastest in the city</div>
+    </div>
+    <div class="stat-item" data-aos="fade-up" data-aos-delay="400">
+      <div class="stat-icon">⭐</div>
+      <div class="stat-number">4.8</div>
+      <div class="stat-label" data-lang-en="Customer Rating" data-lang-te="కస్టమర్ రేటింగ్">Customer Rating</div>
+      <div class="stat-desc">loved by Customers</div>
+    </div>
+  </div>
+</section>
+<!-- CATEGORIES -->
+<section class="categories" id="categories">
+  <div class="section-container">
+    <div class="section-header" data-aos="fade-up">
+      <span class="section-badge" data-lang-en="WHAT WE DELIVER" data-lang-te="మేము డెలివరీ చేసేవి">WHAT WE DELIVER</span>
+      <h2 data-lang-en="From any local shop in the City" data-lang-te="సిటీలో ఏ షాప్ నుండైనా">From any local shop in the City</h2>
+      <p data-lang-en="If the shop exists in our city, we'll get it for you" data-lang-te="మా నగరంలో షాప్ ఉంటే, మేము తెస్తాం">If the shop exists in our city, we'll get it for you</p>
+    </div>
+    <div class="categories-grid">
+      <div class="category-card" data-tilt data-aos="fade-up" data-aos-delay="100">
+        <div class="category-icon">🍱</div>
+        <h3 data-lang-en="Food" data-lang-te="ఫుడ్">Food</h3>
+        <p data-lang-en="Hotels & restaurants" data-lang-te="హోటళ్లు & రెస్టారెంట్లు">Hotels & restaurants</p>
+      </div>
+      <div class="category-card" data-tilt data-aos="fade-up" data-aos-delay="200">
+        <div class="category-icon">🛒</div>
+        <h3 data-lang-en="Groceries" data-lang-te="కిరాణా">Groceries</h3>
+        <p data-lang-en="Kirana & supermarkets" data-lang-te="కిరాణా & సూపర్ మార్కెట్లు">Kirana & supermarkets</p>
+      </div>
+      <div class="category-card" data-tilt data-aos="fade-up" data-aos-delay="300">
+        <div class="category-icon">💊</div>
+        <h3 data-lang-en="Medicine" data-lang-te="మెడిసిన్">Medicine</h3>
+        <p data-lang-en="Local medical shops" data-lang-te="లోకల్ మెడికల్ షాపులు">Local medical shops</p>
+      </div>
+      <div class="category-card" data-tilt data-aos="fade-up" data-aos-delay="400">
+        <div class="category-icon">📦</div>
+        <h3 data-lang-en="Anything" data-lang-te="ఏదైనా">Anything</h3>
+        <p data-lang-en="Any local shop, anything" data-lang-te="ఏ లోకల్ షాప్ అయినా">Any local shop, anything</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-it-works" id="how-it-works">
+  <div class="section-container">
+    <div class="section-header" data-aos="fade-up">
+      <span class="section-badge" data-lang-en="SIMPLE PROCESS" data-lang-te="సులభమైన ప్రక్రియ">SIMPLE PROCESS</span>
+      <h2 data-lang-en="How it works" data-lang-te="ఇది ఎలా పని చేస్తుంది">How it works</h2>
+      <p data-lang-en="Order in 3 easy steps" data-lang-te="3 సులభ దశల్లో ఆర్డర్ చేయండి — యాప్ అవసరం లేదు">Order in 3 easy steps</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card" data-aos="fade-right" data-aos-delay="100">
+        <div class="step-number">01</div>
+        <div class="step-icon">📝</div>
+        <h3 data-lang-en="Tell us what you need" data-lang-te="మీకు ఏం కావాలో చెప్పండి">Tell us what you need</h3>
+        <p data-lang-en="Fill the simple order form — shop name, landmark, items and your delivery address" data-lang-te="సాధారణ ఆర్డర్ ఫారమ్ నింపండి — షాప్ పేరు, లాండ్‌మార్క్, వస్తువులు మరియు మీ చిరునామా">Fill the simple order form — shop name, landmark, items and your delivery address</p>
+      </div>
+      <div class="step-connector">
+        <div class="connector-line"></div>
+        <i class="ti ti-arrow-right"></i>
+      </div>
+      <div class="step-card" data-aos="fade-up" data-aos-delay="250">
+        <div class="step-number">02</div>
+        <div class="step-icon">📞</div>
+        <h3 data-lang-en="We call you back" data-lang-te="మేము మీకు కాల్ చేస్తాం">We call you back</h3>
+        <p data-lang-en="Our team confirms your order details and tells you the exact delivery charges before we proceed" data-lang-te="మా టీమ్ మీ ఆర్డర్ వివరాలు నిర్ధారిస్తుంది మరియు ముందుకు వెళ్ళే ముందు ఖచ్చితమైన డెలివరీ చార్జీలు చెప్తుంది">Our team confirms your order details and tells you the exact delivery charges before we proceed</p>
+      </div>
+      <div class="step-connector">
+        <div class="connector-line"></div>
+        <i class="ti ti-arrow-right"></i>
+      </div>
+      <div class="step-card" data-aos="fade-left" data-aos-delay="400">
+        <div class="step-number">03</div>
+        <div class="step-icon">🛵</div>
+        <h3 data-lang-en="Delivered to your door" data-lang-te="మీ తలుపు వద్దకు డెలివరీ">Delivered to your door</h3>
+        <p data-lang-en="Sit back and relax! Pay cash or UPI directly to our delivery boy at your doorstep." data-lang-te="విశ్రాంతి తీసుకోండి! మా డెలివరీ బాయ్‌కి నేరుగా మీ తలుపు వద్ద నగదు లేదా UPI చెల్లించండి.">Sit back and relax! Pay cash or UPI directly to our delivery boy at your doorstep.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ORDER SECTION -->
+<section class="order-section" id="order">
+  <div class="order-layout">
+    <div class="order-info" data-aos="fade-right">
+      <div class="order-info-header">
+        <span class="section-badge" data-lang-en="PLACE YOUR ORDER" data-lang-te="మీ ఆర్డర్ చేయండి">PLACE YOUR ORDER</span>
+        <h2 data-lang-en="What do you need today?" data-lang-te="ఈరోజు మీకు ఏం కావాలి?">What do you need today?</h2>
+        <p data-lang-en="Fill this form and we'll call you right back within 10 minutes to confirm your order and delivery charges." data-lang-te="ఈ ఫారమ్ నింపండి, మేము 10 నిమిషాల్లో కాల్ చేస్తాం.">Fill this form and we'll call you right back within 10 minutes to confirm your order and delivery charges.</p>
+      </div>
+      <div class="order-features">
+        <div class="order-feature">
+          <div class="order-feature-icon">⚡</div>
+          <div class="order-feature-text">
+            <h4 data-lang-en="Fast Response" data-lang-te="వేగమైన స్పందన">Fast Response</h4>
+            <p data-lang-en="We call back within 10 minutes" data-lang-te="మేము 10 నిమిషాల్లో కాల్ చేస్తాం">We call back within 10 minutes</p>
+          </div>
+        </div>
+        <div class="order-feature">
+          <div class="order-feature-icon">🏪</div>
+          <div class="order-feature-text">
+            <h4 data-lang-en="Any Local Shop" data-lang-te="ఏ లోకల్ షాప్ అయినా">Any Local Shop</h4>
+            <p data-lang-en="If it exists in City, we get it" data-lang-te="సిటీలో ఉంటే, మేము తెస్తాం">If it exists in City, we get it</p>
+          </div>
+        </div>
+        <div class="order-feature">
+          <div class="order-feature-icon">💰</div>
+          <div class="order-feature-text">
+            <h4 data-lang-en="Pay on Delivery" data-lang-te="డెలివరీలో చెల్లించండి">Pay on Delivery</h4>
+            <p data-lang-en="Cash or UPI — no advance payment" data-lang-te="నగదు లేదా UPI — అడ్వాన్స్ లేదు">Cash or UPI — no advance payment</p>
+          </div>
+        </div>
+        <div class="order-feature">
+          <div class="order-feature-icon">🛵</div>
+          <div class="order-feature-text">
+            <h4 data-lang-en="Doorstep Delivery" data-lang-te="తలుపు వద్ద డెలివరీ">Doorstep Delivery</h4>
+            <p data-lang-en="Delivered right to your address" data-lang-te="మీ చిరునామాకు నేరుగా డెలివరీ">Delivered right to your address</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="order-form-wrap" data-aos="fade-left" data-aos-delay="100">
+      <div class="form-title" data-lang-en="📋 Place your order request" data-lang-te="📋 మీ ఆర్డర్ రిక్వెస్ట్ చేయండి">📋 Place your order request</div>
+      <form class="order-form" id="orderForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label data-lang-en="YOUR NAME" data-lang-te="మీ పేరు">YOUR NAME</label>
+            <div class="input-wrapper">
+              <i class="ti ti-user"></i>
+              <input type="text" id="customerName" placeholder="Ravi Kumar" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label data-lang-en="PHONE NUMBER" data-lang-te="ఫోన్ నంబర్">PHONE NUMBER</label>
+            <div class="input-wrapper">
+              <i class="ti ti-phone"></i>
+              <input type="tel" id="customerPhone" placeholder="+91 98765 43210" required>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label data-lang-en="SHOP NAME OR LANDMARK" data-lang-te="షాప్ పేరు లేదా లాండ్‌మార్క్">SHOP NAME OR LANDMARK</label>
+          <div class="input-wrapper">
+            <i class="ti ti-map-pin"></i>
+            <input type="text" id="shopName" placeholder="e.g. Raju Hotel near Bus Stand" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label data-lang-en="WHAT DO YOU WANT?" data-lang-te="మీకు ఏం కావాలి?">WHAT DO YOU WANT?</label>
+          <div class="input-wrapper textarea-wrapper">
+            <i class="ti ti-list"></i>
+            <textarea id="orderItems" rows="3" placeholder="e.g. 2 chicken biryani, 1 cold drink..." required></textarea>
+          </div>
+        </div>
+        <div class="form-group">
+          <label data-lang-en="DELIVERY ADDRESS" data-lang-te="డెలివరీ చిరునామా">DELIVERY ADDRESS</label>
+          <div class="input-wrapper">
+            <i class="ti ti-home"></i>
+            <input type="text" id="deliveryAddress" placeholder="Your street, landmark" required>
+          </div>
+        </div>
+        <button type="submit" class="btn-submit" id="submitBtn">
+          <i class="ti ti-send"></i>
+          <span data-lang-en="Send my order request" data-lang-te="నా ఆర్డర్ పంపండి">Send my order request</span>
+        </button>
+        <p class="form-note" data-lang-en="✅ We'll call you back within 10 minutes to confirm" data-lang-te="✅ నిర్ధారించడానికి మేము 10 నిమిషాల్లో కాల్ చేస్తాం">✅ We'll call you back within 10 minutes to confirm</p>
+      </form>
+      <div class="success-message" id="successMessage">
+        <div class="success-icon">🎉</div>
+        <h3 data-lang-en="Order received!" data-lang-te="ఆర్డర్ అందింది!">Order received!</h3>
+        <p data-lang-en="We'll call you back within 10 minutes to confirm your order and delivery charges." data-lang-te="మేము 10 నిమిషాల్లో కాల్ చేస్తాం.">We'll call you back within 10 minutes to confirm your order and delivery charges.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- WHY NEARBY -->
+<section class="why-nearby">
+  <div class="section-container">
+    <div class="section-header" data-aos="fade-up">
+      <span class="section-badge" data-lang-en="WHY CHOOSE US" data-lang-te="మమ్మల్ని ఎందుకు ఎంచుకోవాలి">WHY CHOOSE US</span>
+      <h2 data-lang-en="The local advantage" data-lang-te="లోకల్ అడ్వాంటేజ్">The local advantage</h2>
+      <p data-lang-en="We're not a big app. We're your neighbours." data-lang-te="మేము పెద్ద యాప్ కాదు. మేము మీ పొరుగువారు.">We're not a big app. We're your neighbours.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card" data-tilt data-aos="fade-up" data-aos-delay="100">
+        <div class="why-icon">📍</div>
+        <h3 data-lang-en="100% Local" data-lang-te="100% లోకల్">100% Local</h3>
+        <p data-lang-en="We know every shop, every lane and every shortcut in the City. No other app knows your city like we do." data-lang-te="సిటీ లోని ప్రతి షాప్, ప్రతి సందు మరియు ప్రతి షార్ట్‌కట్ మాకు తెలుసు.">We know every shop, every lane and every shortcut in the City. No other app knows your city like we do.</p>
+      </div>
+      <div class="why-card" data-tilt data-aos="fade-up" data-aos-delay="200">
+        <div class="why-icon">⚡</div>
+        <h3 data-lang-en="Blazing Fast" data-lang-te="అతి వేగమైన">Blazing Fast</h3>
+        <p data-lang-en="Most orders are delivered in under 30 minutes. We move fast because we know the city inside out." data-lang-te="చాలా ఆర్డర్లు 30 నిమిషాల్లోపు డెలివరీ అవుతాయి.">Most orders are delivered in under 30 minutes. We move fast because we know the city inside out.</p>
+      </div>
+      <div class="why-card" data-tilt data-aos="fade-up" data-aos-delay="300">
+        <div class="why-icon">💰</div>
+        <h3 data-lang-en="Pay on Delivery" data-lang-te="డెలివరీలో చెల్లించండి">Pay on Delivery</h3>
+        <p data-lang-en="Cash or UPI at your door. No advance payment, no hidden fees. You only pay when you receive your order." data-lang-te="మీ తలుపు వద్ద నగదు లేదా UPI. అడ్వాన్స్ పేమెంట్ లేదు.">Cash or UPI at your door. No advance payment, no hidden fees. You only pay when you receive your order.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-brand">
+      <div>
+        <div class="logo-icon small"><i class="ti ti-bike"></i></div>
+        <span>Near<span class="logo-highlight">By</span></span>
+      </div>
+      <p data-lang-en="Your city's own local delivery service. We bring anything from any local shop right to your doorstep." data-lang-te="మీ నగరం  యొక్క స్వంత లోకల్ డెలివరీ సేవ.">Your city's own local delivery service. We bring anything from any local shop right to your doorstep.</p>
+    </div>
+    <div class="footer-links">
+      <div class="footer-col-title">Quick Links</div>
+      <a href="#home" data-lang-en="Home" data-lang-te="హోమ్">Home</a>
+      <a href="#how-it-works" data-lang-en="How it works" data-lang-te="ఎలా పని చేస్తుంది">How it works</a>
+      <a href="#order" data-lang-en="Place Order" data-lang-te="ఆర్డర్ చేయండి">Place Order</a>
+      <a href="about.html" data-lang-en="About Us" data-lang-te="మా గురించి">About Us</a>
+      <a href="contact.html" data-lang-en="Contact" data-lang-te="సంప్రదించండి">Contact</a>
+    </div>
+    <div class="footer-whatsapp">
+      <div class="footer-col-title">Get In Touch</div>
+      <a href="https://wa.me/918008753839" target="_blank" class="whatsapp-btn">
+        <i class="ti ti-brand-whatsapp"></i>
+        <span data-lang-en="Chat with us" data-lang-te="మాతో చాట్ చేయండి">Chat with us</span>
+      </a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 NearBy — <span data-lang-en="Your city's local delivery service" data-lang-te="మీ నగరం  లోకల్ డెలివరీ సేవ">Your city's local delivery service</span></p>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

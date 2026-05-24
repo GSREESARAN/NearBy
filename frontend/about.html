@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — NearBy</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- PAGE LOADER -->
+  <div class="page-loader" id="pageLoader">
+    <div class="loader-logo">Near<span style="color:#8DBF3A">By</span></div>
+    <div class="loader-bar">
+      <div class="loader-fill"></div>
+    </div>
+  </div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar scrolled" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <div class="logo-icon"><i class="ti ti-bike"></i></div>
+        <div class="logo-text">
+          <span class="logo-main">Near<span class="logo-highlight">By</span></span>
+          <span class="logo-sub">Your city's own delivery service</span>  <!--Proddatur-->
+        </div>
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="index.html#how-it-works" class="nav-link">How it works</a>
+        <a href="index.html#order" class="nav-link">Order</a>
+        <a href="about.html" class="nav-link" style="color:var(--green)">About</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+        <a href="index.html#order" class="btn-nav">Order Now</a>
+      </div>
+      <button class="hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="index.html" class="mobile-link">Home</a>
+      <a href="index.html#how-it-works" class="mobile-link">How it works</a>
+      <a href="index.html#order" class="mobile-link">Order</a>
+      <a href="about.html" class="mobile-link">About</a>
+      <a href="contact.html" class="mobile-link">Contact</a>
+    </div>
+  </nav>
+
+  <!-- ABOUT HERO -->
+  <section class="about-hero">
+    <div class="about-hero-content">
+      <div class="hero-badge" data-aos="fade-down" style="margin-bottom:24px; display:inline-flex;">
+        <span class="badge-dot"></span>
+        <span>Our Story</span>
+      </div>
+      <h1 data-aos="fade-up" data-aos-delay="100">
+        Built for <span class="title-highlight">your City.</span><br>By people who love it.  <!-- Proddatur -->
+      </h1>
+      <p data-aos="fade-up" data-aos-delay="200">
+        NearBy was born from a simple observation. your favourite local shops weren't on any delivery app. We decided
+        to fix that.
+      </p>
+    </div>
+  </section>
+
+  <!-- STORY -->
+  <section class="about-story">
+    <div class="section-container">
+      <div class="story-grid">
+        <div class="story-text" data-aos="fade-right">
+          <h2>We started with one simple idea</h2>
+          <p>Every small city has amazing local shops, the best biryani hotel, the trusted medical store, the kirana
+            shop that knows your family by name. But none of them are on Zomato, Swiggy or Blinkit.</p>
+          <p>NearBy bridges that gap. We're not trying to be Swiggy. We're trying to be your city's own delivery service
+             personal, fast, and truly local.</p>
+          <p>Our delivery boys know every street, every shortcut, and every shop in your city. That's our unfair
+            advantage.</p>
+        </div>
+        <div class="story-visual" data-aos="fade-left" data-aos-delay="100">
+          <div class="story-stat">
+            <div class="story-stat-number">500+</div>
+            <div class="story-stat-label">Orders successfully delivered across the city</div> <!--Proddatur-->
+          </div>
+          <div class="story-divider"></div>
+          <div class="story-stat">
+            <div class="story-stat-number">100+</div>
+            <div class="story-stat-label">Local shops we work with regularly</div>
+          </div>
+          <div class="story-divider"></div>
+          <div class="story-stat">
+            <div class="story-stat-number">4.8 ⭐</div>
+            <div class="story-stat-label">Average customer rating</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section class="team-section">
+    <div class="section-container">
+      <div class="section-header" data-aos="fade-up">
+        <span class="section-badge">OUR TEAM</span>
+        <h2>The people behind NearBy</h2>
+        <p>Local boys who know every street in the city</p> <!--Proddatur-->
+      </div>
+      <div class="team-grid">
+        <div class="team-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="team-avatar">👨</div>
+          <h3>Sree Saran</h3>
+          <p>Founder & Operations</p>
+        </div>
+        <div class="team-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="team-avatar">🛵</div>
+          <h3>Delivery Team</h3>
+          <p>50+ dedicated delivery boys</p>
+        </div>
+        <div class="team-card" data-aos="fade-up" data-aos-delay="300">
+          <div class="team-avatar">📞</div>
+          <h3>Support Team</h3>
+          <p>Always available for you</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <div>
+          <div class="logo-icon small"><i class="ti ti-bike"></i></div>
+          <span>Near<span class="logo-highlight">By</span></span>
+        </div>
+        <p>Your city's own local delivery service. We bring anything from any local shop right to your doorstep.</p> <!--proddatur-->
+      </div>
+      <div class="footer-links">
+        <div class="footer-col-title">Quick Links</div>
+        <a href="index.html">Home</a>
+        <a href="index.html#how-it-works">How it works</a>
+        <a href="index.html#order">Place Order</a>
+        <a href="about.html">About Us</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-whatsapp">
+        <div class="footer-col-title">Get In Touch</div>
+        <a href="https://wa.me/918008753839" target="_blank" class="whatsapp-btn">
+          <i class="ti ti-brand-whatsapp"></i>
+          <span>Chat with us</span>
+        </a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 NearBy — Your city's local delivery service</p>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 800, easing: 'ease-out-cubic', once: true, offset: 60 });
+    gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+    window.addEventListener('load', () => {
+      const loader = document.getElementById('pageLoader');
+      if (loader) setTimeout(() => loader.classList.add('hidden'), 1400);
+    });
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger?.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      mobileMenu.classList.toggle('open');
+    });
+    // Navbar — force visible first
+    const navbar = document.getElementById('navbar');
+    navbar.style.opacity = '1';
+    navbar.style.transform = 'translateY(0)'; gsap.from('.about-hero-content > *', { y: 40, opacity: 0, duration: 0.7, stagger: 0.15, ease: 'power3.out', delay: 0.5 });
+  </script>
+</body>
+
+</html>
