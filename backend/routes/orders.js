@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { createClient } = require('@supabase/supabase-js');
-const { sendSMS } = require('../sms');
+const notify = require('../services/notifications');
 const { validateOrderPayload } = require('../utils/validation');
 
 // Connect to Supabase
@@ -44,8 +44,13 @@ router.post('/', async (req, res) => {
     const order = data[0];
 
     // SMS to manager
-    const managerMsg = `New Order - NearBy! Name: ${name}, Phone: ${phone}, Shop: ${shop}, Items: ${items}, Address: ${address}. Login to dashboard to confirm.`;
-    await sendSMS(MANAGER_PHONE, managerMsg);
+    await notify.orderPlaced({
+      name,
+      phone,
+      shop,
+      items,
+      address,
+    });
 
     res.status(201).json({
       success: true,
@@ -99,7 +104,7 @@ router.patch('/:id/confirm', async (req, res) => {
     const order = data[0];
 
     // SMS to customer
-    const customerMsg = `Hi ${order.name}! Your order has been confirmed by NearBy. Shop: ${order.shop}, Items: ${order.items}. Our delivery boy is on the way! Please keep cash/UPI ready. Thank you!`; await sendSMS(order.phone, customerMsg);
+    await notify.orderConfirmed(order);
 
     res.json({ success: true, message: 'Order confirmed!', order });
 
@@ -125,8 +130,7 @@ router.patch('/:id/delivered', async (req, res) => {
     const order = data[0];
 
     // SMS to customer
-    const customerMsg = `Hi ${order.name}! Your order has been delivered by NearBy. Please pay the delivery boy. Thank you for using NearBy!`;
-    await sendSMS(order.phone, customerMsg);
+    await notify.orderDelivered(order);
 
     res.json({ success: true, message: 'Order delivered!', order });
 
