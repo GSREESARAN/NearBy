@@ -54,11 +54,10 @@ router.post('/', async (req, res) => {
     });
 
   } catch (error) {
-    console.error('Full error:', JSON.stringify(error, null, 2));
+    console.error('Order creation error:', error);
     res.status(500).json({
       success: false,
-      message: 'Failed to save order. Try again.',
-      debug: error.message
+      message: 'Failed to save order. Try again.'
     });
   }
 });
@@ -76,7 +75,7 @@ router.get('/', async (req, res) => {
     res.json({ success: true, orders: data });
 
   } catch (error) {
-    console.error('Supabase error:', JSON.stringify(error));
+    console.error('Fetch orders error:', error);
     res.status(500).json({
       success: false,
       message: 'Failed to fetch orders.'
@@ -105,7 +104,7 @@ router.patch('/:id/confirm', async (req, res) => {
     res.json({ success: true, message: 'Order confirmed!', order });
 
   } catch (error) {
-    console.error('Confirm error:', JSON.stringify(error));
+    console.error('Confirm order error:', error);
     res.status(500).json({ success: false, message: 'Failed to confirm order.' });
   }
 });
@@ -132,7 +131,7 @@ router.patch('/:id/delivered', async (req, res) => {
     res.json({ success: true, message: 'Order delivered!', order });
 
   } catch (error) {
-    console.error('Delivered error:', JSON.stringify(error));
+    console.error('Delivered order error:', error);
     res.status(500).json({ success: false, message: 'Failed to update order.' });
   }
 });
