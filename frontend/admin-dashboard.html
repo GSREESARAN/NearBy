@@ -378,6 +378,14 @@
     let allOrders = [];
     let currentFilter = 'all';
 
+    // Escapes HTML-significant characters so user-submitted order data
+    // can never be interpreted as markup/script when injected via innerHTML.
+    function escapeHtml(str) {
+      const div = document.createElement('div');
+      div.textContent = str === null || str === undefined ? '' : String(str);
+      return div.innerHTML;
+    }
+
     // Check auth on page load
     async function checkAuth() {
       const token = localStorage.getItem('nearby_token');
@@ -460,23 +468,23 @@
         <div class="order-details">
           <div class="detail-item">
             <span>👤 Name</span>
-            <p>${order.name}</p>
+            <p>${escapeHtml(order.name)}</p>
           </div>
           <div class="detail-item">
             <span>📞 Phone</span>
-            <p>${order.phone}</p>
+            <p>${escapeHtml(order.phone)}</p>
           </div>
           <div class="detail-item">
             <span>🏪 Shop</span>
-            <p>${order.shop}</p>
+            <p>${escapeHtml(order.shop)}</p>
           </div>
           <div class="detail-full">
             <span>📦 Items</span>
-            <p>${order.items}</p>
+            <p>${escapeHtml(order.items)}</p>
           </div>
           <div class="detail-full">
             <span>📍 Address</span>
-            <p>${order.address}</p>
+            <p>${escapeHtml(order.address)}</p>
           </div>
         </div>
 
