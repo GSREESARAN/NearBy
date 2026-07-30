@@ -1,9 +1,19 @@
 const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
+const crypto = require('crypto');
 const rateLimit = require('express-rate-limit')
 
 const JWT_SECRET = process.env.JWT_SECRET;
+
+// Compares two strings in constant time to avoid leaking match-length
+// via response timing. Returns false safely if lengths differ.
+function timingSafeCompare(a, b) {
+  const bufA = Buffer.from(String(a ?? ''));
+  const bufB = Buffer.from(String(b ?? ''));
+  if (bufA.length !== bufB.length) return false;
+  return crypto.timingSafeEqual(bufA, bufB);
+}
 
 // Limits brute-force attempts against admin credentials/PIN.
 const authLimiter = rateLimit({
@@ -19,8 +29,8 @@ router.post('/login', authLimiter, (req, res) => {
   const { username, password } = req.body;
 
   if (
-    username === process.env.ADMIN_USERNAME &&
-    password === process.env.ADMIN_PASSWORD
+    timingSafeCompare(username, process.env.ADMIN_USERNAME) &&
+    timingSafeCompare(password, process.env.ADMIN_PASSWORD)
   ) {
     const token = jwt.sign({ admin: true }, JWT_SECRET, { expiresIn: '24h' });
     return res.json({ success: true, token });
@@ -33,7 +43,7 @@ router.post('/login', authLimiter, (req, res) => {
 router.post('/pin', authLimiter, (req, res) => {
   const { pin } = req.body;
 
-  if (pin === process.env.ADMIN_PIN) {
+  if (timingSafeCompare(pin, process.env.ADMIN_PIN)) {
     const token = jwt.sign({ admin: true }, JWT_SECRET, { expiresIn: '24h' });
     return res.json({ success: true, token });
   }
