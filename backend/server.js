@@ -6,6 +6,10 @@ dotenv.config();
 
 const app = express();
 
+// Trust the first proxy hop (Render sits behind one) so express-rate-limit
+// reads the real client IP instead of the proxy's internal address.
+app.set('trust proxy', 1);
+
 // Middleware
 app.use(cors({
   origin: ['http://localhost:5500', 'http://127.0.0.1:5500', 'https://near-by-blush.vercel.app', 'https://nearby-backend-pkni.onrender.com'],
