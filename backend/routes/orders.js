@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { createClient } = require('@supabase/supabase-js');
 const { sendSMS } = require('../sms');
+const { validateOrderPayload } = require('../utils/validation');
 
 // Connect to Supabase
 const supabase = createClient(
@@ -16,10 +17,12 @@ const MANAGER_PHONE = process.env.MANAGER_PHONE;
 router.post('/', async (req, res) => {
   const { name, phone, shop, items, address } = req.body;
 
-  if (!name || !phone || !shop || !items || !address) {
+  const errors = validateOrderPayload({ name, phone, shop, items, address });
+  if (errors.length) {
     return res.status(400).json({
       success: false,
-      message: 'All fields are required'
+      message: errors[0],
+      errors
     });
   }
 
@@ -27,7 +30,12 @@ router.post('/', async (req, res) => {
     const { data, error } = await supabase
       .from('orders')
       .insert([{
-        name, phone, shop, items, address, status: 'pending'
+        name: name.trim(),
+        phone: phone.trim(),
+        shop: shop.trim(),
+        items: items.trim(),
+        address: address.trim(),
+        status: 'pending'
       }])
       .select();
 
